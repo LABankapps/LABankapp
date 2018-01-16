@@ -86,7 +86,7 @@ class Alert extends Component {
         <Snackbar
           open={this.state.open}
           anchorOrigin={{vertical, horizontal}}
-          onRequestClose={this.handleRequestClose}
+          onClose={this.handleRequestClose}
           transition={this.state.transition}
           SnackbarContentProps={{
             'aria-describedby': 'message-id',

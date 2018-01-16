@@ -48,7 +48,7 @@ class AccountMenu extends Component {
         <IconButton style={theme.getRowStyle('white', '')} aria-owns={isAccountMenu ? 'menu-account' : null} onClick={onOpen}>
           <AccountCircle  />
         </IconButton>
-        <Menu id="menu-account" anchorEl={anchorElAccountMenu}  open={isAccountMenu} onRequestClose={onClose}>
+        <Menu id="menu-account" anchorEl={anchorElAccountMenu}  open={isAccountMenu} onClose={onClose}>
           {textMenu.map((textMenu) => (
             <Link key={textMenu.name} className={classes.link} style={theme.getRowStyle('', 'none')} to={textMenu.link}>
               <MenuItem onClick={() => {

@@ -43,7 +43,7 @@ class ResetPassword extends React.Component {
     const handleRequestValidate = this.handleRequestValidate;
     const handleChange = this.handleChange;
     return (
-        <Dialog open={open} onRequestClose={handleRequestClose}>
+        <Dialog open={open} onClose={handleRequestClose}>
           <DialogTitle>Reset de mot de passe</DialogTitle>
           <DialogContent>
             <DialogContentText>

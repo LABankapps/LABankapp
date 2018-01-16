@@ -92,7 +92,7 @@ class AskForReservation extends React.Component {
     const handleDate = this.handleDate;
     const handleDuration = this.handleDuration;
     return (
-        <Dialog open={open} onRequestClose={handleRequestClose}>
+        <Dialog open={open} onClose={handleRequestClose}>
           <DialogTitle>Valider la réservation ({card.name})</DialogTitle>
           <DialogContent>
             <DialogContentText>

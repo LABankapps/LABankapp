@@ -36,7 +36,7 @@ class Popup extends Component {
           open={open}
           transition={Transition}
           keepMounted
-          onRequestClose={handleRequestClose}
+          onClose={handleRequestClose}
         >
           <DialogTitle>{title}</DialogTitle>
           <DialogContent>

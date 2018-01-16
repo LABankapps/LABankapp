@@ -26,12 +26,12 @@ const styles = context => ({
   highlight:
     context.palette.type === 'light'
       ? {
-          color: context.palette.secondary.A700,
-          backgroundColor: context.palette.secondary.A100,
+          color: context.palette.secondary.extraDark,
+          backgroundColor: context.palette.secondary.extraLight,
         }
       : {
-          color: context.palette.secondary.A100,
-          backgroundColor: context.palette.secondary.A700,
+          color: context.palette.secondary.extraLight,
+          backgroundColor: context.palette.secondary.extraDark,
         },
   spacer: {
     flex: '1 1 100%',
@@ -130,7 +130,7 @@ class TableToolbar extends React.Component {
                         <VerifiedUserIcon/>
                       </IconButton>
                     </Tooltip>
-                    <Menu id="menu-role" anchorEl={anchorElRoleMenu}  open={isRoleMenu} onRequestClose={onClose}>
+                    <Menu id="menu-role" anchorEl={anchorElRoleMenu}  open={isRoleMenu} onClose={onClose}>
                       {textMenu.map((textMenu) => (
                         <MenuItem key={textMenu.name} onClick={(e) => handleRole(e, textMenu.name)}>
                         {textMenu.name}

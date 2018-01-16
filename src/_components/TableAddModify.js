@@ -214,7 +214,7 @@ class TableAddModify extends Component {
     return (
       <Dialog
         open={open}
-        onRequestClose={handleClose}
+        onClose={handleClose}
         aria-labelledby="table-form-add"
       >
         <DialogTitle id="table-form-title">Formulaire {this.props.data ? 'd\'édition' : 'de création'}</DialogTitle>
@@ -246,7 +246,7 @@ class TableAddModify extends Component {
                     placeholder={data.label}
                     multiline={data.multiline}
                     rows={data.multiline ? 4 : 0}
-                    inputComponent={data.numeric && PriceFormatCustom}
+                    inputComponent={data.numeric ? PriceFormatCustom : ''}
                     endAdornment={
                       <InputAdornment position="start" className={classes.icon}>
                         { data.numeric && <SettingsIcon /> }

@@ -83,7 +83,7 @@ class Menu extends Component {
         <IconButton  style={theme.getRowStyle('white', '')} onClick={onOpen} aria-label="Menu">
           <MenuIcon />
         </IconButton>
-        <Drawer open={isMenu} onRequestClose={onClose}>
+        <Drawer open={isMenu} onClose={onClose}>
           <div tabIndex={0} role="button" onClick={onClose} onKeyDown={onClose}>
             <div className={classes.menuTitleContainer}>
               <Link className={classes.link} style={theme.getRowStyle('', 'none')} to="/">

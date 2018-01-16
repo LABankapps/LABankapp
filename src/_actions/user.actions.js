@@ -15,6 +15,14 @@ export const userActions = {
     resetPsswd
 };
 
+function handleError(error){
+  if(typeof error !== 'object'){
+    return alertActions.error(error);
+  }else{
+    return alertActions.error('Une erreur est survenue');
+  }
+}
+
 function login(username, password) {
     return dispatch => {
         dispatch(request({ username }));
@@ -27,7 +35,7 @@ function login(username, password) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -54,7 +62,7 @@ function register(user) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -74,7 +82,7 @@ function getAll() {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -96,7 +104,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -117,7 +125,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -138,7 +146,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -159,7 +167,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -181,7 +189,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };

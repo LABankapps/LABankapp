@@ -7,7 +7,7 @@ import { theme } from '../_helpers';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 
-//SimpleBar render the LABankapp bar
+//SimpleBar render the LABank bar
 class SimpleBar extends Component {
   render() {
     let { children } = this.props;

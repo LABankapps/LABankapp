@@ -45,7 +45,7 @@ const styles = context => ({
   },
 });
 
-//Render the navigation menu on the LABankapp bar
+//Render the navigation menu on the LABank bar
 class Menu extends Component {
   onOpen = () => {
     this.props.handleMenu();

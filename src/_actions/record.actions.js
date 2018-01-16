@@ -7,6 +7,14 @@ export const recordActions = {
     update
 };
 
+function handleError(error){
+  if(typeof error !== 'object'){
+    return alertActions.error(error);
+  }else{
+    return alertActions.error('Une erreur est survenue');
+  }
+}
+
 function getByUserId(id) {
     return dispatch => {
         dispatch(request());
@@ -17,7 +25,7 @@ function getByUserId(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -38,7 +46,7 @@ function getByUserId(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };

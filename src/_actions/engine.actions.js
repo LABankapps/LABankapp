@@ -12,6 +12,14 @@ export const engineActions = {
     getImageById
 };
 
+function handleError(error){
+  if(typeof error !== 'object'){
+    return alertActions.error(error);
+  }else{
+    return alertActions.error('Une erreur est survenue');
+  }
+}
+
 function getAll() {
     return dispatch => {
         dispatch(request());
@@ -22,7 +30,7 @@ function getAll() {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -43,7 +51,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -67,7 +75,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -91,7 +99,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -112,7 +120,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -133,7 +141,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };
@@ -155,7 +163,7 @@ function _delete(id) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                    dispatch(handleError(error));
                 }
             );
     };

@@ -117,9 +117,21 @@ class AppTable extends Component {
     });
   }
 
+  handleUpdateRecord = (e) => {
+    this.setState({
+      selected : this.state.selected.filter(id => this.props.updateRecord(e, id))
+    });
+  }
+
   handleClickUpdateRole = (e, role) => {
     this.setState({
       selected : this.state.selected.filter(id => this.props.updateRole(e, this.state.data.filter(user => id === user._id ? user.role = role : null)[0]))
+    });
+  }
+
+  handleClickSendMoney = (e, amount) => {
+    this.setState({
+      selected : this.state.selected.filter(id => this.props.sendMoney(e, this.state.data.filter(user => id === user._id ? true : false)[0], amount))
     });
   }
 
@@ -159,14 +171,18 @@ class AppTable extends Component {
 
     //user table specific
     const handleClickUpdateRole = this.handleClickUpdateRole;
+    const handleClickSendMoney = this.handleClickSendMoney;
 
     //engine table specific
     const handleClickAddModify = this.handleClickAddModify;
     const handleAddModify = this.handleAddModify;
+
+    //record table specific
+    const handleUpdateRecord = this.handleUpdateRecord;
     return (
       <div>
         <TableAddModify columnData={columnData} data={edit && data.filter(data => data._id === selected[0])} open={openAddModify} handleClickAddModify={handleClickAddModify} handleSubmit={handleAddModify}/>
-        <TableToolbar tableName={tableName} numSelected={selected.length} handleClickFiltrer={handleClickFiltrer} handleClickDelete={handleClickDelete} handleClickUpdateRole={handleClickUpdateRole} handleClickAddModify={handleClickAddModify}/>
+        <TableToolbar tableName={tableName} numSelected={selected.length} handleClickFiltrer={handleClickFiltrer} handleClickDelete={handleClickDelete} handleClickUpdateRole={handleClickUpdateRole} handleClickSendMoney={handleClickSendMoney} handleClickAddModify={handleClickAddModify} handleUpdateRecord={handleUpdateRecord}/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table}>
             <TableHead
@@ -212,9 +228,11 @@ AppTable.propTypes = {
   tableName: PropTypes.string.isRequired,
   columnData: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
-  delete: PropTypes.func.isRequired,
+  delete: PropTypes.func,
   data: PropTypes.array,
+  updateRecord: PropTypes.func,
   updateRole: PropTypes.func,
+  sendMoney: PropTypes.func,
   addEngine: PropTypes.func,
   editEngine: PropTypes.func,
 }

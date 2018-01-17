@@ -8,7 +8,6 @@ import { theme } from '../_helpers';
 //material-ui icon import
 import IconButton from 'material-ui/IconButton';
 import DevicesIcon from 'material-ui-icons/Devices';
-import BuildIcon from 'material-ui-icons/Build';
 import MenuIcon from 'material-ui-icons/Menu';
 import SettingsIcon from 'material-ui-icons/Settings';
 
@@ -70,12 +69,12 @@ class Menu extends Component {
 
     const navName = [
       { name: 'Machines', icon: DevicesIcon, link: '/engine' },
-      { name: 'Compétences', icon: BuildIcon, link: '/skill' },
     ];
 
     const navAdminName = [
       { name: 'Utilisateurs', icon: SettingsIcon, link: '/admin/users' },
-      { name: 'Machines', icon: SettingsIcon, link: '/admin/engines' }
+      { name: 'Machines', icon: SettingsIcon, link: '/admin/engines' },
+      { name: 'Transactions', icon: SettingsIcon, link: '/admin/records' }
     ];
 
     return(

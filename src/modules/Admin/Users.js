@@ -49,6 +49,11 @@ class UsersAdmin extends Component {
     this.props.dispatch(userActions.update(sentUserInfo(user)));
   }
 
+  sendMoney = (e, user, money) => {
+    console.log(user, money);
+    //this.props.dispatch(userActions.update(sentUserInfo(user)));
+  }
+
   deleteUser = (e, id) => {
     this.props.dispatch(userActions.delete(id));
   }
@@ -68,6 +73,7 @@ class UsersAdmin extends Component {
 
     const deleteUser = this.deleteUser;
     const updateUser = this.updateUser;
+    const sendMoney = this.sendMoney;
     return (
       <div>
         { loading &&
@@ -77,7 +83,7 @@ class UsersAdmin extends Component {
           <Grid container spacing={24}>
             <Grid item xs>
               <Paper>
-                <AppTable tableName="Utilisateurs" columnData={columnData} data={data} updateRole={updateUser} delete={deleteUser}/>
+                <AppTable tableName="Utilisateurs" columnData={columnData} data={data} updateRole={updateUser} delete={deleteUser} sendMoney={sendMoney}/>
               </Paper>
             </Grid>
           </Grid>

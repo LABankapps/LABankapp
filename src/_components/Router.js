@@ -8,8 +8,7 @@ import { Engine } from '../modules/Engine/'
 import { Dashboard } from '../modules/Dashboard/index';
 import { Login } from '../modules/Login';
 import { Register } from '../modules/Register';
-import Skill from '../modules/Skill/index';
-import { EnginesAdmin, UsersAdmin } from '../modules/Admin/index';
+import { EnginesAdmin, UsersAdmin, RecordsAdmin } from '../modules/Admin/index';
 import { Error } from '../modules/Error';
 
 const Router = () => (
@@ -19,9 +18,9 @@ const Router = () => (
     <Route exact path='/register' component={Register}/>
     <PrivateRoute path='/engine' component={Engine}/>
     <PrivateRoute path='/account' component={Account}/>
-    <PrivateRoute path='/skill' component={Skill}/>
     <PrivateRoute path='/admin/users' isAdmin={true} component={UsersAdmin}/>
     <PrivateRoute path='/admin/engines' isAdmin={true} component={EnginesAdmin}/>
+    <PrivateRoute path='/admin/records' isAdmin={true} component={RecordsAdmin}/>
     <Route render={(props)=><Error {...props}/>}/>
   </Switch>
 );

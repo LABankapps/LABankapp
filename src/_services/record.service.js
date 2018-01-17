@@ -3,6 +3,7 @@ import { authHeader, url } from '../_helpers';
 export const recordService = {
     getByUserId,
     update,
+    getAll
 };
 
 function update(record) {
@@ -37,6 +38,23 @@ function getByUserId(id) {
     ))
     .then(handleResponse);
 }
+
+function getAll() {
+  const requestOptions = {
+      method: 'GET',
+      headers: authHeader()
+  };
+
+  return fetch(url() + '/records/all', requestOptions).then(response =>
+    response.json().then(json => ({
+      ok: response.ok,
+      error: "Mauvais token, Reconnectez vous.",
+      json
+    })
+  ))
+  .then(handleResponse);
+}
+
 
 function handleResponse({ok, error = "", json}) {
     if (!ok) {

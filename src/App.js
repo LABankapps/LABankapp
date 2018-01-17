@@ -47,6 +47,8 @@ class App extends Component {
         return 'Admin - Utilisateurs';
       case '/admin/engines':
         return 'Admin - Machines';
+      case '/admin/records':
+        return 'Admin - Transactions';
       default:
         return '';
     }

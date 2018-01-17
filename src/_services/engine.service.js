@@ -11,50 +11,50 @@ export const engineService = {
 };
 
 function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+  const requestOptions = {
+      method: 'GET',
+      headers: authHeader()
+  };
 
-    return fetch(url() + '/engines/all', requestOptions).then(response =>
-      response.json().then(json => ({
-        ok: response.ok,
-        error: "Mauvais token, Reconnectez vous.",
-        json
-      })
-    ))
-    .then(handleResponse);
+  return fetch(url() + '/engines/all', requestOptions).then(response =>
+    response.json().then(json => ({
+      ok: response.ok,
+      error: "Mauvais token, Reconnectez vous.",
+      json
+    })
+  ))
+  .then(handleResponse);
 }
 
 function getImageById(engine) {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+  const requestOptions = {
+      method: 'GET',
+      headers: authHeader()
+  };
 
-    return fetch(url() + '/engines/img' + engine._id, requestOptions).then(response =>
-      response.json().then(json => ({
-        ok: response.ok,
-        error: "Mauvais token, Reconnectez vous.",
-        json
-      })
-    ))
-    .then(handleResponse);
+  return fetch(url() + '/engines/img' + engine._id, requestOptions).then(response =>
+    response.json().then(json => ({
+      ok: response.ok,
+      error: "Mauvais token, Reconnectez vous.",
+      json
+    })
+  ))
+  .then(handleResponse);
 }
 
 function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
+  const requestOptions = {
+      method: 'DELETE',
+      headers: authHeader()
+  };
 
-    return fetch(url() + '/engines/' + id, requestOptions).then(response =>
-      response.json().then(json => ({
-        ok: response.ok,
-        json
-      })
-    ))
-    .then(handleResponse);
+  return fetch(url() + '/engines/' + id, requestOptions).then(response =>
+    response.json().then(json => ({
+      ok: response.ok,
+      json
+    })
+  ))
+  .then(handleResponse);
 }
 
 function reservation(engine, reservation) {

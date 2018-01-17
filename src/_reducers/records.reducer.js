@@ -2,6 +2,18 @@ import { recordConstants } from '../_constants';
 
 export function records(state = {}, action) {
   switch (action.type) {
+    case recordConstants.GETALL_REQUEST:
+      return {
+        loading: true
+      };
+    case recordConstants.GETALL_SUCCESS:
+      return {
+        items: action.records
+      };
+    case recordConstants.GETALL_FAILURE:
+      return {
+        error: action.error
+      };
     case recordConstants.GETBYUSERID_REQUEST:
       return {
         loading: true

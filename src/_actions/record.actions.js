@@ -4,7 +4,8 @@ import { alertActions } from './';
 
 export const recordActions = {
     getByUserId,
-    update
+    update,
+    getAll
 };
 
 function handleError(error){
@@ -33,6 +34,26 @@ function getByUserId(id) {
     function request() { return { type: recordConstants.GETBYUSERID_REQUEST } }
     function success(records) { return { type: recordConstants.GETBYUSERID_SUCCESS, records } }
     function failure(error) { return { type: recordConstants.GETBYUSERID_FAILURE, error } }
+}
+
+function getAll() {
+    return dispatch => {
+        dispatch(request());
+
+        recordService.getAll()
+            .then(
+                records => { dispatch(success(records.records));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(handleError(error));
+                }
+            );
+    };
+
+    function request() { return { type: recordConstants.GETALL_REQUEST } }
+    function success(records) { return { type: recordConstants.GETALL_SUCCESS, records } }
+    function failure(error) { return { type: recordConstants.GETALL_FAILURE, error } }
 }
 
   function update(record){

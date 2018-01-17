@@ -8,5 +8,6 @@ export const setRecordInfo = (record) => {
     duration: record.duration,
     status: record.status,
     price: record.price,
+    type: record.engine ? 'reservation' : 'Compétence',
   };
 };

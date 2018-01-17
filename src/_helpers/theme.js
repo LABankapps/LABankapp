@@ -55,18 +55,10 @@ class theme {
   renderTheme = createMuiTheme({
     palette: {
       primary: {
-        extraLight: pink['A100'],
-        light: pink[300],
-        main: pink[500],
-        dark: pink[700],
-        extraDark: pink['A700'],
+        ...pink,
       },
       secondary: {
-        extraLight: lime['A100'],
-        light: lime[300],
-        main: lime[500],
-        dark: lime[700],
-        extraDark: lime['A700'],
+        ...lime,
       },
     },
     status: {

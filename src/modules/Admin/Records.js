@@ -56,10 +56,13 @@ class RecordsAdmin extends Component {
     let { data } = this.state;
 
     const columnData = [
-      { id: 'type', image: false, numeric: false, disablePadding: true, label: 'Type' },
+      { id: 'from', image: false, numeric: false, disablePadding: false, label: 'Personne' },
+      { id: 'engine', image: false, numeric: false, disablePadding: false, label: 'Machine' },
+      { id: 'date', image: false, numeric: true, disablePadding: false, label: 'Date' },
+      { id: 'duration', image: false, numeric: true, disablePadding: false, label: 'Durée' },
+      { id: 'price', image: false, numeric: true, disablePadding: false, label: 'Prix' },
+      { id: 'status', image: false, numeric: false, disablePadding: false, label: 'Statut' },
     ];
-
-    console.log(data);
 
     const updateRecord = this.updateRecord;
     return (

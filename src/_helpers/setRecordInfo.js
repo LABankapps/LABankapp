@@ -4,10 +4,9 @@ export const setRecordInfo = (record) => {
     _id: record._id,
     from: record.from,
     engine: record.engine,
-    date: record.date,
-    duration: record.duration,
-    status: record.status,
+    date: new Date(record.date).toLocaleString().slice(0, -3),
+    duration: new Date(record.duration).toLocaleTimeString().slice(0, -3),
+    status: record.status === 'Waiting' ? 'En attente' : record.status === 'Accept' ? 'Accepté' : 'Annulé',
     price: record.price,
-    type: record.engine ? 'reservation' : 'Compétence',
   };
 };

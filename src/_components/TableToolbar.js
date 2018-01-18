@@ -22,6 +22,7 @@ import EditIcon from 'material-ui-icons/Edit';
 import SettingsIcon from 'material-ui-icons/Settings';
 import SendIcon from 'material-ui-icons/Send';
 import DoneIcon from 'material-ui-icons/Done';
+import BuildIcon from 'material-ui-icons/Build';
 
 const styles = context => ({
   root: {
@@ -58,7 +59,7 @@ const styles = context => ({
 class TableToolbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { anchorElRoleMenu: null, open: false, anchorElMoneyMenu: null, ecr: 0};
+    this.state = { anchorElRoleMenu: null, open: false, anchorElMoneyMenu: null, anchorElSkillMenu: null, ecr: undefined, skill: undefined};
   }
 
     handleClickAddModify = (e, edit = false) => {
@@ -80,6 +81,11 @@ class TableToolbar extends React.Component {
       this.onCloseMoney();
     }
 
+    handleSkill = (e) => {
+      this.props.handleClickAddSkill(e, this.state.skill);
+      this.onCloseSkill();
+    }
+
     onOpen = (e) => {
       this.setState({ anchorElRoleMenu: e.currentTarget });
     }
@@ -96,6 +102,14 @@ class TableToolbar extends React.Component {
       this.setState({ anchorElMoneyMenu: null });
     }
 
+    onOpenSkill = (e) => {
+      this.setState({ anchorElSkillMenu: e.currentTarget });
+    }
+
+    onCloseSkill = () => {
+      this.setState({ anchorElSkillMenu: null });
+    }
+
     handleClickOpen = () => {
       this.setState({ open: true });
     };
@@ -110,7 +124,7 @@ class TableToolbar extends React.Component {
 
   render() {
     let { numSelected, classes, tableName, handleClickFiltrer, handleClickDelete, handleUpdateRecord } = this.props;
-    let { anchorElRoleMenu, open, anchorElMoneyMenu } = this.state;
+    let { anchorElRoleMenu, open, anchorElMoneyMenu, anchorElSkillMenu } = this.state;
 
     const onOpen = this.onOpen; //Handle click on role 'open'
     const onClose = this.onClose; //Handle click on role 'close'
@@ -118,6 +132,8 @@ class TableToolbar extends React.Component {
     const handleRequestClose = this.handleRequestClose;
     const onOpenMoney = this.onOpenMoney;
     const onCloseMoney = this.onCloseMoney;
+    const onOpenSkill = this.onOpenSkill;
+    const onCloseSkill = this.onCloseSkill;
 
     //user table specific
     let isUser = tableName === 'Utilisateurs' ? true : false;
@@ -130,6 +146,7 @@ class TableToolbar extends React.Component {
 
     let isRoleMenu = Boolean(anchorElRoleMenu);
     let isMoneyMenu = Boolean(anchorElMoneyMenu);
+    let isSkillMenu = Boolean(anchorElSkillMenu);
 
     const handleRole = this.handleRole;
 
@@ -184,10 +201,30 @@ class TableToolbar extends React.Component {
                         margin={'dense'}
                         placeholder={'nombre d\'écrou à envoyer..'}
                         inputComponent={PriceFormatCustom}
-                        value={this.state.money}
+                        value={this.state.ecr}
                         onChange={this.handleChange}
                       />
                       <IconButton onClick={this.handleMoney}>
+                        <SendIcon/>
+                      </IconButton>
+                    </Menu>
+                    <Tooltip title="Ajout de compétence">
+                      <IconButton aria-owns={isSkillMenu ? 'menu-skill' : null} onClick={onOpenSkill}>
+                        <BuildIcon/>
+                      </IconButton>
+                    </Tooltip>
+                    <Menu id="menu-Skill" anchorEl={anchorElSkillMenu}  open={isSkillMenu} onClose={onCloseSkill}>
+                      <Input
+                        onKeyPress={this.catchReturn}
+                        className={classes.input}
+                        name="skill"
+                        disableUnderline={true}
+                        margin={'dense'}
+                        placeholder={'Compétence à ajouter..'}
+                        value={this.state.skill}
+                        onChange={this.handleChange}
+                      />
+                      <IconButton onClick={this.handleSkill}>
                         <SendIcon/>
                       </IconButton>
                     </Menu>
@@ -201,7 +238,7 @@ class TableToolbar extends React.Component {
                     </Tooltip>
                   )
                 }
-                { isEngine && isUser ?
+                { isEngine || isUser ?
                   <Tooltip title="Supprimer">
                     <IconButton aria-label="Delete" onClick={handleClickOpen}>
                       <DeleteIcon />
@@ -246,6 +283,7 @@ TableToolbar.propTypes = {
   handleClickDelete: PropTypes.func.isRequired,
   handleClickUpdateRole: PropTypes.func,
   handleClickSendMoney: PropTypes.func,
+  handleClickAddSkill: PropTypes.func,
   handleClickAddModifyModify: PropTypes.func,
   handleUpdateRecord: PropTypes.func,
 };

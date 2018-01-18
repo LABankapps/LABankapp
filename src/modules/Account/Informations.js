@@ -24,6 +24,7 @@ const styles = context => ({
     padding: 20,
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   headlineContainer: {
     width: '100%',

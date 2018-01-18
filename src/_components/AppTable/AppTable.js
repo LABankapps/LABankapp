@@ -135,6 +135,12 @@ class AppTable extends Component {
     });
   }
 
+  handleClickAddSkill = (e, amount) => {
+    this.setState({
+      selected : this.state.selected.filter(id => this.props.addSkill(e, this.state.data.filter(user => id === user._id ? true : false)[0], amount))
+    });
+  }
+
   handleClickAddModify = (e, edit = false) => {
     this.setState(prevState => ({
       openAddModify: !prevState.openAddModify,
@@ -172,6 +178,7 @@ class AppTable extends Component {
     //user table specific
     const handleClickUpdateRole = this.handleClickUpdateRole;
     const handleClickSendMoney = this.handleClickSendMoney;
+    const handleClickAddSkill = this.handleClickAddSkill;
 
     //engine table specific
     const handleClickAddModify = this.handleClickAddModify;
@@ -182,7 +189,7 @@ class AppTable extends Component {
     return (
       <div>
         <TableAddModify columnData={columnData} data={edit && data.filter(data => data._id === selected[0])} open={openAddModify} handleClickAddModify={handleClickAddModify} handleSubmit={handleAddModify}/>
-        <TableToolbar tableName={tableName} numSelected={selected.length} handleClickFiltrer={handleClickFiltrer} handleClickDelete={handleClickDelete} handleClickUpdateRole={handleClickUpdateRole} handleClickSendMoney={handleClickSendMoney} handleClickAddModify={handleClickAddModify} handleUpdateRecord={handleUpdateRecord}/>
+        <TableToolbar tableName={tableName} numSelected={selected.length} handleClickFiltrer={handleClickFiltrer} handleClickDelete={handleClickDelete} handleClickUpdateRole={handleClickUpdateRole} handleClickSendMoney={handleClickSendMoney} handleClickAddSkill={handleClickAddSkill} handleClickAddModify={handleClickAddModify} handleUpdateRecord={handleUpdateRecord}/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table}>
             <TableHead
@@ -233,6 +240,7 @@ AppTable.propTypes = {
   updateRecord: PropTypes.func,
   updateRole: PropTypes.func,
   sendMoney: PropTypes.func,
+  addSkill: PropTypes.func,
   addEngine: PropTypes.func,
   editEngine: PropTypes.func,
 }

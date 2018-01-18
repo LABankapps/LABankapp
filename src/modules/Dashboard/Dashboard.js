@@ -151,16 +151,15 @@ class Dashboard extends Component {
                     records && engines ? (
                       records.map(record => {
                         let engineName = engines.filter(engine => engine._id === record.engine)[0];
-                        const dateDurationUser = new Date(new Date(record.date).getTime() + (new Date(record.duration).getHours() * 60 + new Date(record.duration).getMinutes()) * 60000 ).toLocaleString();
                         return (
-                          <Tooltip key={record._id} title={"termine le " + dateDurationUser} placement='bottom' enterDelay={300}>
+                          <Tooltip key={record._id} title={getStatus(record.status)} placement='bottom' enterDelay={300}>
                             <div className={classnames(classes.rowReservation, {
-                                  [classes.waiting]: record.status === 'Waiting',
-                                  [classes.accept]: record.status === 'Accept',
-                                  [classes.cancel]: record.status === 'Cancel',
+                                  [classes.waiting]: record.status === 'En attente',
+                                  [classes.accept]: record.status === 'Accepté',
+                                  [classes.cancel]: record.status === 'Annulé',
                                 }
                               )}>
-                              <span>"{engineName !== undefined ? engineName.name : ""}"</span> du <span>{new Date(record.date).toLocaleString()}</span> pendant <span>{new Date(record.duration).toLocaleTimeString().slice(0, -3)}</span> h <span className={classes.alignItems}>({record.price} <SettingsIcon />)</span>  | <span>{getStatus(record.status)}</span>
+                              <span>"{engineName !== undefined ? engineName.name : ""}"</span> du <span>{record.date}</span> pendant <span>{record.duration}</span> h <span className={classes.alignItems}>({record.price} <SettingsIcon />)</span>
                             </div>
                           </Tooltip>
                         )

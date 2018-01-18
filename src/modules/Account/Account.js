@@ -26,8 +26,10 @@ const styles = context => ({
     justifyContent: 'center',
     overflow: 'auto',
   },
+  paper: {
+    width: '100%',
+  }
 });
-
 
 class Account extends Component {
   constructor(props) {
@@ -114,10 +116,10 @@ class Account extends Component {
             </Grid>
             <Grid item xs={12} className={classes.center}>
               { user ?
-                <Paper>
+                <Paper className={classes.paper}>
                   { tab === 0 &&  <Informations state={this.state} handleChange={handleChange} handleSubmit={handleSubmit} handleChangePassword={handleChangePassword} handleSubmitPassword={handleSubmitPassword} /> }
-                  { tab === 1 && <Skills/> }
-                  { tab === 2 && <Wallet/> }
+                  { tab === 1 && <Skills state={this.state}/> }
+                  { tab === 2 && <Wallet state={this.state}/> }
                 </Paper> :
                 <CircularProgress />
               }

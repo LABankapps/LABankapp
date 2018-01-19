@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 //Material-ui import
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
 import { CircularProgress } from 'material-ui/Progress';
 
 //styles

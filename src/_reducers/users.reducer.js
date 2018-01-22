@@ -5,7 +5,7 @@ export function users(state = {}, action) {
     case userConstants.BALANCE_SUCCESS:
       return {
         items: state.items.map(user => (
-          user._id === action.user._id ? { ...action.user, action.balance } : user
+          user._id === action.user._id ? { ...action.user, balance: action.balance } : user
         )),
       };
     case userConstants.GETALL_REQUEST:

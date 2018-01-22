@@ -87,6 +87,7 @@ class Dashboard extends Component {
 
     this.props.dispatch(recordActions.getByUserId(props.user._id));
     this.props.dispatch(userActions.getById(props.user._id));
+    this.props.dispatch(userActions.getBalance(props.user)); //temp
     this.props.dispatch(engineActions.getAll());
 
     this.state = {
@@ -179,8 +180,8 @@ class Dashboard extends Component {
                 <Divider />
                 <div className={classes.paperContent}>
                   {
-                    user.wallet ? (
-                      <div>{user.wallet}</div>
+                    user.balance ? (
+                      <div>{user.balance}</div>
                     ) : (
                       <div className={classes.loading}>
                         <CircularProgress />

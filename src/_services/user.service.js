@@ -4,6 +4,8 @@ export const userService = {
     login,
     logout,
     register,
+    registerBlockChainID,
+    getBalance,
     getAll,
     getById,
     update,
@@ -71,6 +73,36 @@ function getById(id) {
       response.json().then(json => ({
         ok: response.ok,
         error: "Mauvais token, Reconnectez vous.",
+        json
+      })
+    ))
+    .then(handleResponse);
+}
+
+function registerBlockChainID() {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    };
+
+    return fetch(url() + '/blockchain/user', requestOptions).then(response =>
+      response.json().then(json => ({
+        ok: response.ok,
+        json
+      })
+    ))
+    .then(handleResponse);
+}
+
+function getBalance(blockChainId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    };
+
+    return fetch(url() + '/blockchain/balanceOf/' + blockChainId , requestOptions).then(response =>
+      response.json().then(json => ({
+        ok: response.ok,
         json
       })
     ))

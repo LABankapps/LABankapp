@@ -7,7 +7,8 @@ export const setUserInfo = (user) => {
     phone: user.profile.phone,
     gender: user.profile.gender,
     email: user.email,
-    role: user.role
+    role: user.role,
+    blockChainId: user.profile.blockChainId,
   };
 };
 
@@ -20,6 +21,7 @@ export const sentUserInfo = (user) => {
       lastName: user.lastName,
       phone: user.phone,
       gender: user.gender,
+      blockChainId: user.blockChainId,
     },
     email: user.email,
     role: user.role

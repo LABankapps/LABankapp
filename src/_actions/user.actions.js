@@ -7,11 +7,13 @@ export const userActions = {
     login,
     logout,
     register,
+    registerBlockChainID,
     getAll,
     getById,
     update,
     updatePassword,
     delete: _delete,
+    getBalance,
     resetPsswd
 };
 
@@ -58,6 +60,7 @@ function register(user) {
             .then(
                 user => {
                     dispatch(success());
+                    //this.registerBlockChainID(user);
                     history.push('/login');
                 },
                 error => {
@@ -67,9 +70,53 @@ function register(user) {
             );
     };
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
+    function request(user) { return { type: userConstants.REGISTER_REQUEST_BLOCKCHAIN, user } }
+    function success(user) { return { type: userConstants.REGISTER_SUCCESS_BLOCKCHAIN, user } }
+    function failure(error) { return { type: userConstants.REGISTER_FAILURE_BLOCKCHAIN, error } }
+}
+
+function registerBlockChainID(user) {
+    return dispatch => {
+        dispatch(request());
+
+        userService.registerBlockChainID()
+            .then(
+                blockChain => {
+                    dispatch(success(user, blockChain.uad));
+                    user.profile.blockChainId = blockChain.uad;
+                    this.update(user);
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(handleError(error));
+                }
+            );
+    };
+
+    function request() { return { type: userConstants.REGISTER_REQUEST } }
+    function success(user, uad) { return { type: userConstants.REGISTER_SUCCESS, user, uad } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+}
+
+function getBalance(user){
+  return dispatch => {
+      dispatch(request());
+
+      userService.getBalance(user.profile.blockChainId)
+          .then(
+              blockChain => {
+                  dispatch(success(user, blockChain.balance));
+              },
+              error => {
+                  dispatch(failure(error));
+                  dispatch(handleError(error));
+              }
+          );
+  };
+
+  function request() { return { type: userConstants.BALANCE_REQUEST } }
+  function success(user, balance) { return { type: userConstants.BALANCE_SUCCESS, user, balance } }
+  function failure(error) { return { type: userConstants.BALANCE_FAILURE, error } }
 }
 
 function getAll() {

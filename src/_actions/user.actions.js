@@ -10,6 +10,7 @@ export const userActions = {
     registerBlockChainID,
     getAll,
     getById,
+    addBalance,
     update,
     updatePassword,
     delete: _delete,
@@ -54,13 +55,12 @@ function logout() {
 
 function register(user) {
     return dispatch => {
-        dispatch(request(user));
+        dispatch(request());
 
         userService.register(user)
             .then(
                 user => {
                     dispatch(success());
-                    //this.registerBlockChainID(user);
                     history.push('/login');
                 },
                 error => {
@@ -70,9 +70,9 @@ function register(user) {
             );
     };
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST_BLOCKCHAIN, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS_BLOCKCHAIN, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE_BLOCKCHAIN, error } }
+    function request() { return { type: userConstants.REGISTER_REQUEST } }
+    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
 function registerBlockChainID(user) {
@@ -83,8 +83,8 @@ function registerBlockChainID(user) {
             .then(
                 blockChain => {
                     dispatch(success(user, blockChain.uad));
-                    user.profile.blockChainId = blockChain.uad;
-                    this.update(user);
+                    user.blockChainId = blockChain.uad;
+                    dispatch(register(user));
                 },
                 error => {
                     dispatch(failure(error));
@@ -94,7 +94,7 @@ function registerBlockChainID(user) {
     };
 
     function request() { return { type: userConstants.REGISTER_REQUEST } }
-    function success(user, uad) { return { type: userConstants.REGISTER_SUCCESS, user, uad } }
+    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
@@ -117,6 +117,27 @@ function getBalance(user){
   function request() { return { type: userConstants.BALANCE_REQUEST } }
   function success(user, balance) { return { type: userConstants.BALANCE_SUCCESS, user, balance } }
   function failure(error) { return { type: userConstants.BALANCE_FAILURE, error } }
+}
+
+function addBalance(user, amount){
+  return dispatch => {
+      dispatch(request());
+
+      userService.addBalance(user.profile.blockChainId, amount)
+          .then(
+              blockChain => {
+                  dispatch(success(user, amount));
+              },
+              error => {
+                  dispatch(failure(error));
+                  dispatch(handleError(error));
+              }
+          );
+  };
+
+  function request() { return { type: userConstants.ADD_BALANCE_REQUEST } }
+  function success(user, amount) { return { type: userConstants.ADD_BALANCE_SUCCESS, user, amount } }
+  function failure(error) { return { type: userConstants.ADD_BALANCE_FAILURE, error } }
 }
 
 function getAll() {

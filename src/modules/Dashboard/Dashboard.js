@@ -87,7 +87,7 @@ class Dashboard extends Component {
 
     this.props.dispatch(recordActions.getByUserId(props.user._id));
     this.props.dispatch(userActions.getById(props.user._id));
-    this.props.dispatch(userActions.getBalance(props.user)); //temp
+    //this.props.dispatch(userActions.getBalance(props.user)); //temp
     this.props.dispatch(engineActions.getAll());
 
     this.state = {

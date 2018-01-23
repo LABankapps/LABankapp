@@ -2,11 +2,18 @@ import { userConstants } from '../_constants';
 
 export function users(state = {}, action) {
   switch (action.type) {
+    case userConstants.ADD_BALANCE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case userConstants.ADD_BALANCE_SUCCESS:
+      return {
+        ...state,
+      };
     case userConstants.BALANCE_SUCCESS:
       return {
-        items: state.items.map(user => (
-          user._id === action.user._id ? { ...action.user, balance: action.balance } : user
-        )),
+        items: { ...action.user, balance: action.balance },
       };
     case userConstants.GETALL_REQUEST:
       return {

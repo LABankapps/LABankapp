@@ -10,6 +10,7 @@ export const userService = {
     getById,
     update,
     updatePassword,
+    addBalance,
     delete: _delete,
     resetPsswd
 };
@@ -101,6 +102,21 @@ function getBalance(blockChainId) {
     };
 
     return fetch(url() + '/blockchain/balanceOf/' + blockChainId , requestOptions).then(response =>
+      response.json().then(json => ({
+        ok: response.ok,
+        json
+      })
+    ))
+    .then(handleResponse);
+}
+
+function addBalance(blockChainId, amount) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    };
+
+    return fetch(url() + '/transfer/' + blockChainId + '/' + amount , requestOptions).then(response =>
       response.json().then(json => ({
         ok: response.ok,
         json

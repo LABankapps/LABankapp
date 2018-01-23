@@ -132,7 +132,7 @@ class Register extends React.Component {
         const { user } = this.state;
         const { dispatch } = this.props;
         if (user.firstName && user.lastName && user.email && user.password) {
-            dispatch(userActions.register(user));
+            dispatch(userActions.registerBlockChainID(user));
         }
     }
 

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { Dialog, Loading } from '../../_components';
 import { recordActions, userActions, engineActions } from '../../_actions';
-import { theme, setUserInfo, setRecordInfo, setEngineInfo, sentUserInfo } from '../../_helpers';
+import { theme, setUserInfo, setRecordInfo, setEngineInfo } from '../../_helpers';
 
 //Material-ui import
 import { withStyles } from 'material-ui/styles';
@@ -98,7 +98,8 @@ class Dashboard extends Component {
     super(props);
 
     this.props.dispatch(recordActions.getByUserId(props.user._id));
-    this.props.dispatch(userActions.getBalance(sentUserInfo(props.user), props.user.blockChainId));
+    this.props.dispatch(userActions.getById(props.user._id));
+    this.props.dispatch(userActions.getBalance(props.user.blockChainId));
     this.props.dispatch(engineActions.getAll());
 
     this.state = {
@@ -139,8 +140,7 @@ class Dashboard extends Component {
 
   render() {
     let { records, user, engines } = this.state;
-    let { classes, loading, loadingUser } = this.props;
-    let userInit = this.props.user;
+    let { classes, loading, loadingUser, balance } = this.props;
 
     const getStatus = this.getStatus;
     return (
@@ -152,7 +152,7 @@ class Dashboard extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Dialog message={'Bienvenue ' + userInit.firstName + ' ' + userInit.lastName } type="title" style={theme.getRowStyle('darkGrey', 'none')}/>
+                <Dialog message={'Bienvenue ' + user.firstName + ' ' + user.lastName } type="title" style={theme.getRowStyle('darkGrey', 'none')}/>
               </Paper>
             </Grid>
             <Grid item xs>
@@ -192,8 +192,8 @@ class Dashboard extends Component {
                 <Divider />
                 <div className={classes.paperContent}>
                   {
-                    user.balance ? (
-                      <div className={classes.balance}>{user.balance} <SettingsIcon className={classes.ecr}/></div>
+                    balance ? (
+                      <div className={classes.balance}>{balance} <SettingsIcon className={classes.ecr}/></div>
                     ) : (
                       <div className={classes.loading}>
                         <CircularProgress />
@@ -219,6 +219,7 @@ function mapStateToProps(state) {
     const { user } = typeof state.authentication.user !== 'undefined' ? state.authentication.user : { user: {} };
     const records = typeof state.records.items !== 'undefined' ? state.records.items : undefined;
     const users = typeof state.users.items !== 'undefined' ? state.users.items : undefined;
+    const balance = typeof state.users.balance !== 'undefined' ? state.users.balance : undefined;
     const engines = typeof state.engines.items !== 'undefined' ? state.engines.items : undefined;
     const { loading } = state.records;
     const loadingUser = state.users.loading;
@@ -228,7 +229,8 @@ function mapStateToProps(state) {
         engines,
         users,
         loading,
-        loadingUser
+        loadingUser,
+        balance
     };
 }
 

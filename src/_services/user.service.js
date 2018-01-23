@@ -116,7 +116,7 @@ function addBalance(blockChainId, amount) {
         headers: authHeader()
     };
 
-    return fetch(url() + '/transfer/' + blockChainId + '/' + amount , requestOptions).then(response =>
+    return fetch(url() + '/blockchain/transfer/' + blockChainId + '/' + amount , requestOptions).then(response =>
       response.json().then(json => ({
         ok: response.ok,
         json

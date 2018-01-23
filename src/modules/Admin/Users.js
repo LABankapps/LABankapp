@@ -50,8 +50,7 @@ class UsersAdmin extends Component {
   }
 
   sendMoney = (e, user, money) => {
-    console.log('Ecrou :', user, money);
-    //this.props.dispatch(userActions.update(sentUserInfo(user)));
+    this.props.dispatch(userActions.addBalance(sentUserInfo(user), money));
   }
 
   addSkill = (e, user, skill) => {

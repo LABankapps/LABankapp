@@ -7,13 +7,14 @@ export function users(state = {}, action) {
         ...state,
         loading: true,
       };
-    case userConstants.ADD_BALANCE_SUCCESS:
-      return {
-        ...state,
-      };
+      case userConstants.ADD_BALANCE_SUCCESS:
+        return {};
+      case userConstants.ADD_BALANCE_FAILURE:
+        return {};
     case userConstants.BALANCE_SUCCESS:
       return {
-        items: [{ ...action.user, balance: action.balance }],
+        ...state,
+        balance: action.balance,
       };
     case userConstants.GETALL_REQUEST:
       return {
@@ -33,6 +34,8 @@ export function users(state = {}, action) {
       };
     case userConstants.GETBYID_SUCCESS:
       return {
+        ...state,
+        loading: false,
         items: action.user
       };
     case userConstants.GETBYID_FAILURE:

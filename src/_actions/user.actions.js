@@ -98,14 +98,14 @@ function registerBlockChainID(user) {
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
-function getBalance(user, uad){
+function getBalance(uad){
   return dispatch => {
       dispatch(request());
 
       userService.getBalance(uad)
           .then(
               blockChain => {
-                  dispatch(success(user, blockChain.balance));
+                  dispatch(success(blockChain.balance));
               },
               error => {
                   dispatch(failure(error));
@@ -115,7 +115,7 @@ function getBalance(user, uad){
   };
 
   function request() { return { type: userConstants.BALANCE_REQUEST } }
-  function success(user, balance) { return { type: userConstants.BALANCE_SUCCESS, user, balance } }
+  function success(balance) { return { type: userConstants.BALANCE_SUCCESS, balance } }
   function failure(error) { return { type: userConstants.BALANCE_FAILURE, error } }
 }
 
@@ -127,6 +127,7 @@ function addBalance(user, amount){
           .then(
               blockChain => {
                   dispatch(success(user, amount));
+                  dispatch(alertActions.success("Montant envoyé."));
               },
               error => {
                   dispatch(failure(error));

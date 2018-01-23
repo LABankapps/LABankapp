@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { Dialog, Loading } from '../../_components';
 import { recordActions, userActions, engineActions } from '../../_actions';
-import { theme, setUserInfo, setRecordInfo, setEngineInfo } from '../../_helpers';
+import { theme, setUserInfo, setRecordInfo, setEngineInfo, sentUserInfo } from '../../_helpers';
 
 //Material-ui import
 import { withStyles } from 'material-ui/styles';
@@ -13,7 +13,7 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import { CircularProgress } from 'material-ui/Progress';
 import Tooltip from 'material-ui/Tooltip';
-import { orange, red, green } from 'material-ui/colors';
+import { orange, red, green, pink } from 'material-ui/colors';
 import Divider from 'material-ui/Divider';
 
 //material-ui-icon import
@@ -49,6 +49,18 @@ const styles = context => ({
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: 200,
+    },
+    balance: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: 200,
+      fontSize: 50,
+      color: pink[300],
+    },
+    ecr: {
+      width: 45,
+      height: 40
     },
     alignItems:{
       alignItems: 'center',
@@ -86,8 +98,7 @@ class Dashboard extends Component {
     super(props);
 
     this.props.dispatch(recordActions.getByUserId(props.user._id));
-    this.props.dispatch(userActions.getById(props.user._id));
-    //this.props.dispatch(userActions.getBalance(props.user)); //temp
+    this.props.dispatch(userActions.getBalance(sentUserInfo(props.user), props.user.blockChainId));
     this.props.dispatch(engineActions.getAll());
 
     this.state = {
@@ -129,6 +140,7 @@ class Dashboard extends Component {
   render() {
     let { records, user, engines } = this.state;
     let { classes, loading, loadingUser } = this.props;
+    let userInit = this.props.user;
 
     const getStatus = this.getStatus;
     return (
@@ -140,7 +152,7 @@ class Dashboard extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Dialog message={'Bienvenue ' + user.firstName + ' ' + user.lastName} type="title" style={theme.getRowStyle('darkGrey', 'none')}/>
+                <Dialog message={'Bienvenue ' + userInit.firstName + ' ' + userInit.lastName } type="title" style={theme.getRowStyle('darkGrey', 'none')}/>
               </Paper>
             </Grid>
             <Grid item xs>
@@ -181,7 +193,7 @@ class Dashboard extends Component {
                 <div className={classes.paperContent}>
                   {
                     user.balance ? (
-                      <div>{user.balance}</div>
+                      <div className={classes.balance}>{user.balance} <SettingsIcon className={classes.ecr}/></div>
                     ) : (
                       <div className={classes.loading}>
                         <CircularProgress />

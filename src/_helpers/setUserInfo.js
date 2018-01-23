@@ -9,6 +9,7 @@ export const setUserInfo = (user) => {
     email: user.email,
     role: user.role,
     blockChainId: user.profile.blockChainId,
+    balance: user.balance,
   };
 };
 

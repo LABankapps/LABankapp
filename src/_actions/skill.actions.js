@@ -23,7 +23,7 @@ function getSkill(uad) {
         skillService.getSkill(uad)
             .then(
                 skill => {
-                    dispatch(success(skill.skill));
+                    dispatch(success(skill.skills));
                 },
                 error => {
                     dispatch(failure(error));

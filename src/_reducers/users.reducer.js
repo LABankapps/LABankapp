@@ -13,7 +13,7 @@ export function users(state = {}, action) {
       };
     case userConstants.BALANCE_SUCCESS:
       return {
-        items: { ...action.user, balance: action.balance },
+        items: [{ ...action.user, balance: action.balance }],
       };
     case userConstants.GETALL_REQUEST:
       return {

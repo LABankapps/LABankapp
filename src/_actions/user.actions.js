@@ -82,8 +82,8 @@ function registerBlockChainID(user) {
         userService.registerBlockChainID()
             .then(
                 blockChain => {
-                    dispatch(success(user, blockChain.uad));
-                    user.blockChainId = blockChain.uad;
+                    dispatch(success(user, blockChain.address));
+                    user.blockChainId = blockChain.address;
                     dispatch(register(user));
                 },
                 error => {
@@ -98,11 +98,11 @@ function registerBlockChainID(user) {
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
-function getBalance(user){
+function getBalance(user, uad){
   return dispatch => {
       dispatch(request());
 
-      userService.getBalance(user.profile.blockChainId)
+      userService.getBalance(uad)
           .then(
               blockChain => {
                   dispatch(success(user, blockChain.balance));

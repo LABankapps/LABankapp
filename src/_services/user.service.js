@@ -98,7 +98,7 @@ function registerBlockChainID() {
 function getBalance(blockChainId) {
     const requestOptions = {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeader()
     };
 
     return fetch(url() + '/blockchain/balanceOf/' + blockChainId , requestOptions).then(response =>
@@ -113,7 +113,7 @@ function getBalance(blockChainId) {
 function addBalance(blockChainId, amount) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeader()
     };
 
     return fetch(url() + '/transfer/' + blockChainId + '/' + amount , requestOptions).then(response =>

@@ -24,12 +24,12 @@ export function skills(state = {}, action) {
       return {
         loading: true,
         items: state.items.map(skill => (
-          skill.name === action.name ? { ...action.name, deleting: true } : skill
+          skill.name === action.name ? { name: action.name, deleting: true } : skill
         )),
       };
     case skillConstants.DELETE_SKILL_SUCCESS:
       return {
-        items: state.items.filter(skill => skill.name !== action.name)
+        items: state.items.filter(skill => !skill.deleting)
       };
     case skillConstants.DELETE_SKILL_FAILURE:
     return {

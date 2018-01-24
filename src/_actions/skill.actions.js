@@ -40,11 +40,12 @@ function getSkill(uad) {
 function addSkill(uad, skill) {
     return dispatch => {
         dispatch(request());
-        
+
         skillService.addSkill(uad, skill)
             .then(
                 skill => {
                     dispatch(success());
+                    dispatch(alertActions.error('Compétence ajouté'));
                 },
                 error => {
                     dispatch(failure(error));
@@ -61,11 +62,12 @@ function addSkill(uad, skill) {
 function deleteSkill(uad, name) {
     return dispatch => {
         dispatch(request(name));
-
+        
         skillService.deleteSkill(uad, name)
             .then(
                 skill => {
                     dispatch(success(name));
+                    dispatch(alertActions.error('Compétence supprimé'));
                 },
                 error => {
                     dispatch(failure(error));
@@ -74,7 +76,7 @@ function deleteSkill(uad, name) {
             );
     };
 
-    function request(skill) { return { type: skillConstants.DELETE_SKILL_REQUEST, skill } }
+    function request(name) { return { type: skillConstants.DELETE_SKILL_REQUEST, name } }
     function success() { return { type: skillConstants.DELETE_SKILL_SUCCESS } }
     function failure(error) { return { type: skillConstants.DELETE_SKILL_FAILURE, error } }
 }

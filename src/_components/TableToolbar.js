@@ -154,6 +154,8 @@ class TableToolbar extends React.Component {
     //engine table specific
     let isEngine = tableName === 'Machines' ? true : false;
 
+    let isSkills = tableName === 'Compétences' ? true : false;
+
     const handleClickAddModify = this.handleClickAddModify;
     return(
       <div>
@@ -239,7 +241,7 @@ class TableToolbar extends React.Component {
                     </Tooltip>
                   )
                 }
-                { isEngine || isUser ?
+                { isEngine || isUser || isSkills ?
                   <Tooltip title="Supprimer">
                     <IconButton aria-label="Delete" onClick={handleClickOpen}>
                       <DeleteIcon />

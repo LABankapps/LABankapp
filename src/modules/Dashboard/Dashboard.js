@@ -151,7 +151,6 @@ class Dashboard extends Component {
     let { classes, loading, loadingUser, balance } = this.props;
 
     const getStatus = this.getStatus;
-    console.log(engines)
     return (
       <div>
         { (loading || loadingUser) &&

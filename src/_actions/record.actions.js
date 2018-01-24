@@ -64,6 +64,7 @@ function getAll() {
             .then(
                 record => {
                     dispatch(success(record.record));
+                    dispatch(alertActions.success('Transaction effectuée !'));
                 },
                 error => {
                     dispatch(failure(error));

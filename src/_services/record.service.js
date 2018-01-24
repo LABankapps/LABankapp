@@ -14,7 +14,6 @@ function approve(id) {
     return fetch(url() + '/records/' + id, requestOptions).then(response =>
       response.json().then(json => ({
         ok: response.ok,
-        error: "Mauvais token, Reconnectez vous.",
         json
       })
     ))

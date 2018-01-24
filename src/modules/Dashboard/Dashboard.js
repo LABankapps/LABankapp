@@ -62,6 +62,14 @@ const styles = context => ({
       width: 45,
       height: 40
     },
+    reservations: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: 200,
+      fontSize: 30,
+      color: pink[300],
+    },
     alignItems:{
       alignItems: 'center',
       display: 'flex',
@@ -143,6 +151,7 @@ class Dashboard extends Component {
     let { classes, loading, loadingUser, balance } = this.props;
 
     const getStatus = this.getStatus;
+    console.log(engines)
     return (
       <div>
         { (loading || loadingUser) &&
@@ -162,21 +171,24 @@ class Dashboard extends Component {
                 <div className={classes.paperContent}>
                   {
                     records && engines ? (
-                      records.map(record => {
-                        let engineName = engines.filter(engine => engine._id === record.engine)[0];
-                        return (
-                          <Tooltip key={record._id} title={getStatus(record.status)} placement='bottom' enterDelay={300}>
-                            <div className={classnames(classes.rowReservation, {
-                                  [classes.waiting]: record.status === 'En attente',
-                                  [classes.accept]: record.status === 'Accepté',
-                                  [classes.cancel]: record.status === 'Annulé',
-                                }
-                              )}>
-                              <span>"{engineName !== undefined ? engineName.name : ""}"</span> du <span>{record.date}</span> pendant <span>{record.duration}</span> h <span className={classes.alignItems}>({record.price} <SettingsIcon />)</span>
-                            </div>
-                          </Tooltip>
-                        )
-                      })
+                      records !== undefined ?
+                        <div className={classes.reservations}>Aucune réservation</div>
+                      :
+                        records.map(record => {
+                          let engineName = engines.filter(engine => engine._id === record.engine)[0];
+                          return (
+                            <Tooltip key={record._id} title={getStatus(record.status)} placement='bottom' enterDelay={300}>
+                              <div className={classnames(classes.rowReservation, {
+                                    [classes.waiting]: record.status === 'En attente',
+                                    [classes.accept]: record.status === 'Accepté',
+                                    [classes.cancel]: record.status === 'Annulé',
+                                  }
+                                )}>
+                                <span>"{engineName !== undefined ? engineName.name : ""}"</span> du <span>{record.date}</span> pendant <span>{record.duration}</span> h <span className={classes.alignItems}>({record.price} <SettingsIcon />)</span>
+                              </div>
+                            </Tooltip>
+                          )
+                        })
                     ) : (
                       <div className={classes.loading}>
                         <CircularProgress />

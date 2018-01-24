@@ -2,7 +2,7 @@ import { skillConstants } from '../_constants';
 import { skillService } from '../_services';
 import { alertActions } from './';
 
-export const recordActions = {
+export const skillActions = {
   getSkill,
   addSkill,
   deleteSkill,
@@ -40,8 +40,8 @@ function getSkill(uad) {
 function addSkill(uad, skill) {
     return dispatch => {
         dispatch(request());
-
-        skillService.addSkill(uad)
+        
+        skillService.addSkill(uad, skill)
             .then(
                 skill => {
                     dispatch(success());

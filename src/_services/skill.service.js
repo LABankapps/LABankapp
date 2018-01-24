@@ -27,7 +27,7 @@ function addSkill(uad, skill) {
         method: 'POST',
         headers: authHeader()
     };
-
+    
     return fetch(url() + '/blockchain/skill/' + uad + '/' + skill, requestOptions).then(response =>
       response.json().then(json => ({
         ok: response.ok,

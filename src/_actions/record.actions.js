@@ -4,7 +4,7 @@ import { alertActions } from './';
 
 export const recordActions = {
     getByUserId,
-    update,
+    approve,
     getAll
 };
 
@@ -56,11 +56,11 @@ function getAll() {
     function failure(error) { return { type: recordConstants.GETALL_FAILURE, error } }
 }
 
-  function update(record){
+  function approve(id){
     return dispatch => {
-        dispatch(request(record));
+        dispatch(request(id));
 
-        recordService.update(record)
+        recordService.approve(id)
             .then(
                 record => {
                     dispatch(success(record.record));

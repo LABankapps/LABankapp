@@ -2,18 +2,16 @@ import { authHeader, url } from '../_helpers';
 
 export const recordService = {
     getByUserId,
-    update,
+    approve,
     getAll
 };
 
-function update(record) {
+function approve(id) {
   const requestOptions = {
-      method: 'PUT',
+      method: 'POST',
       headers: { ...authHeader(), 'Content-Type': 'application/json' },
-      body: JSON.stringify(record)
   };
-
-    return fetch(url() + '/records/' + record._id, requestOptions).then(response =>
+    return fetch(url() + '/records/' + id, requestOptions).then(response =>
       response.json().then(json => ({
         ok: response.ok,
         error: "Mauvais token, Reconnectez vous.",

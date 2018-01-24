@@ -135,9 +135,9 @@ class AppTable extends Component {
     });
   }
 
-  handleClickAddSkill = (e, amount) => {
+  handleClickAddSkill = (e, skill) => {
     this.setState({
-      selected : this.state.selected.filter(id => this.props.addSkill(e, this.state.data.filter(user => id === user._id ? true : false)[0], amount))
+      selected : this.state.selected.filter(id => this.props.addSkill(e, this.state.data.filter(user => id === user._id ? true : false)[0], skill))
     });
   }
 

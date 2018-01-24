@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../_actions';
+import { userActions, skillActions } from '../../_actions';
 import { Loading, AppTable } from '../../_components';
 import { setUserInfo, sentUserInfo } from '../../_helpers';
 
@@ -54,8 +54,7 @@ class UsersAdmin extends Component {
   }
 
   addSkill = (e, user, skill) => {
-    console.log('Compétence: ', user, skill);
-    //this.props.dispatch(userActions.update(sentUserInfo(user)));
+    this.props.dispatch(skillActions.addSkill(user.blockChainId, skill));
   }
 
   deleteUser = (e, id) => {

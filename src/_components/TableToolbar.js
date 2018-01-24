@@ -59,7 +59,7 @@ const styles = context => ({
 class TableToolbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { anchorElRoleMenu: null, open: false, anchorElMoneyMenu: null, anchorElSkillMenu: null, ecr: undefined, skill: undefined};
+    this.state = { anchorElRoleMenu: null, open: false, anchorElMoneyMenu: null, anchorElSkillMenu: null, ecr: '', skill: ''};
   }
 
     handleClickAddModify = (e, edit = false) => {
@@ -99,7 +99,7 @@ class TableToolbar extends React.Component {
     }
 
     onCloseMoney = () => {
-      this.setState({ anchorElMoneyMenu: null });
+      this.setState({ anchorElMoneyMenu: null, ecr: '' });
     }
 
     onOpenSkill = (e) => {
@@ -107,7 +107,7 @@ class TableToolbar extends React.Component {
     }
 
     onCloseSkill = () => {
-      this.setState({ anchorElSkillMenu: null });
+      this.setState({ anchorElSkillMenu: null, skill: '' });
     }
 
     handleClickOpen = () => {
@@ -118,8 +118,9 @@ class TableToolbar extends React.Component {
       this.setState({ open: false });
     };
 
-    catchReturn = (e) =>{
-      if(e.key === 'Enter') { this.handleMoney(e); }
+    catchReturn = (e, ) =>{
+      let isMoneyMenu = Boolean(this.state.anchorElMoneyMenu);
+      if(e.key === 'Enter') { isMoneyMenu ? this.handleMoney(e) : this.handleSkill(e); }
     }
 
   render() {

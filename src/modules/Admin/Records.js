@@ -46,9 +46,8 @@ class RecordsAdmin extends Component {
     }
   }
 
-  updateRecord = (e, record) => {
-    console.log(record);
-    //this.props.dispatch(recordActions.update(record));
+  updateRecord = (e, id) => {
+    this.props.dispatch(recordActions.approve(id));
   }
 
   render() {

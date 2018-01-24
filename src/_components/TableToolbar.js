@@ -76,6 +76,14 @@ class TableToolbar extends React.Component {
       this.setState({ [name]: value });
     };
 
+    handleChangeText = (e) => {
+      let { name, value } = e.target;
+      let regex = new RegExp('^[a-zA-Z ]*$'); // without number
+      value = Array.from(value).filter(val => regex.test(val)).join("");
+
+      this.setState({ [name]: value });
+    };
+
     handleMoney = (e) => {
       this.props.handleClickSendMoney(e, this.state.ecr);
       this.onCloseMoney();
@@ -225,7 +233,7 @@ class TableToolbar extends React.Component {
                         margin={'dense'}
                         placeholder={'Compétence à ajouter..'}
                         value={this.state.skill}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeText}
                       />
                       <IconButton onClick={this.handleSkill}>
                         <SendIcon/>

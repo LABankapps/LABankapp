@@ -170,7 +170,7 @@ class Dashboard extends Component {
                 <div className={classes.paperContent}>
                   {
                     records && engines ? (
-                      records !== undefined ?
+                      records[0] === undefined ?
                         <div className={classes.reservations}>Aucune réservation</div>
                       :
                         records.map(record => {

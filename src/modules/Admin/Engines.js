@@ -5,7 +5,7 @@ import socketIOClient from "socket.io-client";
 
 import { engineActions } from '../../_actions';
 import { Loading, AppTable } from '../../_components';
-import { setEngineInfo } from '../../_helpers';
+import { setEngineInfo, url } from '../../_helpers';
 
 //Material-ui import
 import Paper from 'material-ui/Paper';
@@ -36,7 +36,7 @@ class EnginesAdmin extends Component {
 
     this.state = {
       data: [],
-      endpoint: "http://localhost:8000/"
+      endpoint: url()
     }
   }
 

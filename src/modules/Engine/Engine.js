@@ -5,7 +5,7 @@ import socketIOClient from "socket.io-client";
 
 import { engineActions } from '../../_actions';
 import { Loading, AppCard, Search } from '../../_components';
-import { setEngineInfo, theme } from '../../_helpers';
+import { setEngineInfo, theme, url } from '../../_helpers';
 
 //Material-ui import
 import Paper from 'material-ui/Paper';
@@ -57,7 +57,7 @@ class Engine extends Component {
       data: [],
       page: 0,
       CardPerPage: 8,
-      endpoint: "http://localhost:8000/"
+      endpoint: url()
     }
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "LABank",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
     "autoprefixer": "7.2.5",
     "babel-core": "6.26.0",

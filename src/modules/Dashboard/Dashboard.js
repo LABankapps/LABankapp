@@ -165,7 +165,7 @@ class Dashboard extends Component {
             </Grid>
             <Grid item xs>
               <Paper className={classes.paper}>
-                <Dialog message="RESERVATIONS" type="title" style={theme.getRowStyle('darkGrey', 'none')}/>
+                <Dialog message="RÉSERVATIONS" type="title" style={theme.getRowStyle('darkGrey', 'none')}/>
                 <Divider />
                 <div className={classes.paperContent}>
                   {

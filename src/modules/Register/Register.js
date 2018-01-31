@@ -198,7 +198,7 @@ class Register extends React.Component {
                       </FormControl>
                       <FormGroup className={classes.formGroup}>
                         <Button className={classes.button} type="submit" raised color="primary">
-                          Inscriptions
+                          Inscription
                           <Send className={classes.rightIcon}/>
                         </Button>
                         <Link to="/login" className={classes.textLink}><Typography className={classes.textLink}>Se connecter ?</Typography></Link>
